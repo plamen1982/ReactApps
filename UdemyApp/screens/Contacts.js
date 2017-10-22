@@ -1,13 +1,29 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { 
+    View, 
+    Text,
+    FlatList,
+ } from 'react-native'
+
+import {  contacts } from '../config/data'
+import colors from '../config/colors'
+import { ListItem } from '../components/ListItem'
 
 class Contacts extends Component {
+    hadlgeRowPress = (item) =>{
+        return null
+    }
     render() {
         return(
-            <View 
-             style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-             <Text>Contact View</Text>            
-            </View>
+                <FlatList
+                    style = {{ backgroundColor: colors.background }}
+                    data = { contacts }
+                    renderItem = {({ item }) => 
+                    <ListItem contact={ item } onPress={()=> this.hadlgeRowPress(item)}
+                    keyExtractor = { (item)=> item.email }
+                    />
+                }
+                />
             ) 
         }
     }

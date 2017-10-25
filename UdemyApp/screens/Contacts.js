@@ -5,13 +5,14 @@ import {
     FlatList,
  } from 'react-native'
 
-import {  contacts } from '../config/data'
+import { contacts } from '../config/data'
 import colors from '../config/colors'
 import { ListItem } from '../components/ListItem'
 
 class Contacts extends Component {
     hadlgeRowPress = (item) =>{
-        return null
+        
+        this.props.navigation.navigate('Details', item)
     }
     render() {
         return(

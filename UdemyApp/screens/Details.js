@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 
 import  Header  from '../components/UserDetails/Header'
+import  Actions from '../components/UserDetails/Actions'
 import  colors  from '../config/colors'
 
 class Details extends Component {
@@ -9,9 +10,10 @@ class Details extends Component {
         const contact = this.props.navigation.state.params;
 
         return(
-            <View >
+            <ScrollView style = {{backgroundColor: colors.background}}>
                 <Header {...contact}/>
-            </View>
+                <Actions {...contact}/>
+            </ScrollView>
 
             )
         }

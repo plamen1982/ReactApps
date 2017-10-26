@@ -58,4 +58,7 @@ export default StyleSheet.create({
     actionIcon:{
         marginLeft: 14,
     },
+    infoContainer: {
+        paddingVertical: 15,
+    }
 })

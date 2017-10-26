@@ -1,10 +1,12 @@
 import React from 'react'
 import { Text, View, Platform, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-
 import Row from './Row'
+import Info from './Info'
 
-const Actions = ({ email, cell, phone }) => {
+import styles from './styles'
+
+const Actions = ({ email, cell, phone, city, registered, username, birthdate }) => {
     return(
         <View style = {styles.actionContainer} >
             <Row 
@@ -47,6 +49,7 @@ const Actions = ({ email, cell, phone }) => {
                     },
             ]}     
             />
+
         </View>
     )
 }

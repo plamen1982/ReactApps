@@ -6,7 +6,7 @@ class NewContact extends Component {
         return(
             <View 
              style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-             <Text> Me NewContact </Text>            
+             <Text> NewContact View </Text>            
             </View>
             ) 
         }

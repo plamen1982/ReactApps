@@ -7,13 +7,13 @@ import styles from './styles'
 const DrawerButton = ({ onPress }) => {
     return (
         <TouchableOpacity
-            onPress = {onPress}
-            style = {styles.drawerButtonContainer}
+            onPress = { onPress }
+            style = { styles.drawerButtonContainer }
         >
-        <Icon 
-            name = "md-menu"
-            size = {22}
-         />
+            <Icon 
+                name = "md-menu"
+                size = {22}
+            />
          </TouchableOpacity>
     )
 }

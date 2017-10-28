@@ -9,10 +9,11 @@ import NewContact from '../screens/NewContact'
 import Me from '../screens/Me'
 
 import { capitalizeFirstLetter } from '../helpers/strings'
+import { DrawerButton } from '../components/Header'
 
 export const LeftDrawerButton = ({ navigation }) => {
     if (Platform.OS === 'android'){
-        return <Button title='Open' onPress={()=>navigation.navigate('DrawerOpen')} />
+        return <DrawerButton onPress={()=>navigation.navigate('DrawerOpen')} />
     }
     return null;
 }

@@ -1,4 +1,6 @@
-import { StackNavigator, TabNavigator } from 'react-navigation'
+import React from 'react'
+import { Button } from 'react-native'
+import { StackNavigator,TabNavigator, DrawerNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import Contacts from '../screens/Contacts'
@@ -12,9 +14,10 @@ import { capitalizeFirstLetter } from '../helpers/strings'
 export const ContactsStack = StackNavigator({
     Contacts: { 
         screen: Contacts,
-        navigationOptions: {
-            title: 'Contacts'
-        } 
+        navigationOptions: ({ navigation }) => ({
+            title: 'Contacts',
+            headerLeft: <Button title='Open' onPress={()=>navigation.navigate('DrawerOpen')} />
+        }) 
     },
     Details: {
         screen: Details,
@@ -31,45 +34,70 @@ export const ContactsStack = StackNavigator({
     }
 })
 
-const MeStack = StackNavigator({
+export const MeStack = StackNavigator({
     Me: {
         screen: Me,
-        navigationOptions: {
-            headerTitle: 'Me'
-        }
+        navigationOptions: ({ navigation })=> ({
+            title: 'Me',
+            headerLeft: <Button title='Open' onPress={()=>navigation.navigate('DrawerOpen')} />
+        }) 
     }
   })
 
-const NewContactStack = StackNavigator({
+export const NewContactStack = StackNavigator({
     NewContact: {
         screen: NewContact,
-        navigationOptions: {
-            headerTitle: 'New Contact'
-        }
+        navigationOptions: ({ navigation })=> ({
+            title: 'New Contact',
+            headerLeft: <Button title='Open' onPress={()=>navigation.navigate('DrawerOpen')} />
+        }) 
     }
   })
 
-export const Tabs = TabNavigator({
+export const Drawer = DrawerNavigator({
     Contacts: {
         screen: ContactsStack,
         navigationOptions: {
-            tabBarLabel: 'Contact',
-            tabBarIcon : ({ tintColor }) => <Icon name="ios-list" size={35} color={tintColor}/>
-        }
-    },
-    NewContact: {
-        screen: NewContactStack,
-        navigationOptions: {
-            tabBarLabel: 'New Contact',
-            tabBarIcon : ({ tintColor }) => <Icon name="ios-add" size={35} color={tintColor}/>
+            drawerLabel: 'Contacts',
+            drawerIcon: ({ tintColor }) => <Icon name="ios-list" size={35} color={tintColor}/>   
         }
     },
     Me: {
         screen: MeStack,
         navigationOptions: {
-            tabBarLabel: 'Me',
-            tabBarIcon : ({ tintColor }) => <Icon name="ios-contact" size={35} color={tintColor}/>
+            drawerLabel: 'Me',
+            drawerIcon: ({ tintColor }) => <Icon name="ios-contact" size={35} color={tintColor}/>
+        }
+    },
+    NewContact: {
+        screen: NewContactStack,
+        navigationOptions: {
+            drawerLabel: 'New contact',
+            drawerIcon: ({ tintColor }) => <Icon name="ios-add" size={35} color={tintColor}/>
         }
     }
 })
 
+// export const Tabs = TabNavigator({
+//     Contacts: {
+//         screen: ContactsStack,
+//         navigationOptions: {
+//             tabBarLabel: 'Contact',
+//             tabBarIcon : ({ tintColor }) => <Icon name="ios-list" size={35} color={tintColor}/>
+//         }
+//     },
+//     NewContact: {
+//         screen: NewContactStack,
+//         navigationOptions: {
+//             tabBarLabel: 'New Contact',
+//             tabBarIcon : ({ tintColor }) => <Icon name="ios-add" size={35} color={tintColor}/>
+//         }
+//     },
+//     Me: {
+//         screen: MeStack,
+//         navigationOptions: {
+//             tabBarLabel: 'Me',
+//             tabBarIcon : ({ tintColor }) => <Icon name="ios-contact" size={35} color={tintColor}/>
+//         }
+//     }
+// })

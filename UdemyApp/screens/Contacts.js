@@ -13,6 +13,7 @@ class Contacts extends Component {
     hadlgeRowPress = (item) =>{
         
         this.props.navigation.navigate('Details', item)
+        
     }
     render() {
         return(
@@ -20,7 +21,7 @@ class Contacts extends Component {
                     style = {{ backgroundColor: colors.background }}
                     data = { contacts }
                     renderItem = {({ item }) => 
-                    <ListItem contact={ item } onPress={()=> this.hadlgeRowPress(item)}
+                    <ListItem contact={ item } onPress={()=> this.hadlgeRowPress(item) }
                     keyExtractor = { (item)=> item.email }
                     />
                 }

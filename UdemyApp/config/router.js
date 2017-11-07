@@ -40,7 +40,6 @@ export const ContactsStack = StackNavigator({
         })
     }
 })
-
 export const MeStack = StackNavigator({
     Me: {
         screen: Me,

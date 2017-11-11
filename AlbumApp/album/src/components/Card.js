@@ -23,7 +23,6 @@ const styles = {
         marginLeft: 5,
         marginRight: 5,        
         marginTop: 10,
-
     }
 };
 

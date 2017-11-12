@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Linking } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
@@ -8,7 +8,7 @@ import Button from './Button';
 // destructing argument object album inside AlbumDetail component
 const AlbumDetail = ({ recordAlbum }) => {
 // destructing title, artist and thumbnail_image from album    
-    const { title, artist, thumbnail_image, image } = recordAlbum;
+    const { title, artist, thumbnail_image, image, url } = recordAlbum;
     const { 
         thumbnailStyle, 
         headerContentStyle, 
@@ -39,7 +39,10 @@ const AlbumDetail = ({ recordAlbum }) => {
             </CardSection>
 
             <CardSection>
-                <Button whenPress={() => console.log(title)} />
+            {/* whenPress is a custom function that can be access with props in Button.js */}
+                <Button whenPress={() => Linking.openURL(url)} >
+                    Buy Now
+                </Button>
             </CardSection>
 
         </Card>

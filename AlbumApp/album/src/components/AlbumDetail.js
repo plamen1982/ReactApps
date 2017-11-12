@@ -2,6 +2,8 @@ import React from 'react';
 import { Text, View, Image } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
+import Button from './Button';
+
 
 // destructing argument object album inside AlbumDetail component
 const AlbumDetail = ({ recordAlbum }) => {
@@ -28,12 +30,18 @@ const AlbumDetail = ({ recordAlbum }) => {
                     <Text>{artist}</Text>                    
                 </View>
             </CardSection>
+
             <CardSection>
                 <Image 
                     style={imageStyle} 
                     source={{ uri: image }}
                 />
             </CardSection>
+
+            <CardSection>
+                <Button whenPress={() => console.log(title)} />
+            </CardSection>
+
         </Card>
     );
 };

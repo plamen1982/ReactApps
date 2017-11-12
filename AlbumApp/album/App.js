@@ -6,7 +6,8 @@ import Header from './src/components/Header';
 import AlbumList from './src/components/AlbumList';
 //Create a component
  const App = () => ( 
-      <View>
+       //when we use ScrollView(in AlbumList), alaways use style={{ flex: 1 }} into the parent
+      <View style={{ flex: 1 }} >
             <Header headerText={'Albums'} />
             <AlbumList />
       </View>

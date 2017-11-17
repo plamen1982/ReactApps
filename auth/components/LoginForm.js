@@ -1,23 +1,52 @@
 import React, { Component } from 'react';
-import { Button, Card, CardSection, Input } from './common';
 import firebase from 'firebase';
+import { Text } from 'react-native';
+import { Button, Card, CardSection, Input, Spinner } from './common';
 
 class LoginForm extends Component{
-    state = { email: '', password: '', error: '' }
-    onButtonPress(){
+    state = { email: '', password: '', error: '', loading: false }
 
-        const { email, password, error } = this.state;
+    onButtonPress() {
+        console.log('Button were pressed from Login form!')
+
+        const { email, password } = this.state;
+
+
+
+        this.setState({ error: '', loading: true });
+
         firebase.auth().signInWithEmailAndPassword(email, password)
-        // if there no such user, create this user
-        .catch(()=>{
-          firebase.auth().createUserWithEmailAndPassword(email, password) 
-        // if we are not able to create a user through an error 
-        .catch(()=>{
-            this.setState({error: 'Authentication failed.'})
+            .then(this.onLoginSuccess.bind(this))
+            .catch(()=>{
+                firebase.auth().createUserWithEmailAndPassword(email, password) 
+                    .then(this.onLoginSuccess.bind(this))
+                    .catch(this.onLoginFail.bind(this));
         })
-    })
+    }
+    onLoginFail() {
+        this.setState({error: 'Authentication failed.', loading: false})
     }
 
+
+    onLoginSuccess() {
+       this.setState({
+           email: '',
+           password: '',
+           loading: false,
+           error: ''
+       }) 
+    }
+
+    renderButton() {
+        if (this.state.loading){
+            return <Spinner size="small" />
+        }   
+            return (
+            <Button onPress={this.onButtonPress.bind(this)}>
+                Log in
+            </Button>
+            )
+    }
     render() {
         return (
             <Card>
@@ -35,30 +64,26 @@ class LoginForm extends Component{
                         placeholder="password"
                         label="Password"
                         value={this.state.password}
-                        onChangeText={password => this.setState({password})}
+                        onChangeText={password => this.setState({ password })}
 
                     />
                 </CardSection>
+                <Text style={styles.errorTextStyle}>
+                    {this.state.error}
+                </Text>
                 <CardSection>
-                    <Text styles={styles.errorTextStyle}>
-                        {this.state.error}
-                    </Text>
-
-                    {/* connect the cb funct -> onButtonPress to the component  */}
-                    <Button onPress={this.onButtonPress.bind(this)}>
-                        Log in
-                    </Button>
+                    {this.renderButton()}
                 </CardSection>
             </Card>
         )
     }
 }
 
-styles = {
+const styles = {
     errorTextStyle: {
         fontSize: 20,
         alignSelf: 'center',
-        colro: 'red'
+        color: 'red'
     } 
 }
 

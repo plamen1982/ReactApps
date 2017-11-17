@@ -7,20 +7,19 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
         <View style={ containerStyle }>
             <Text style={ labelStyle }>{label}</Text>
             <TextInput
+                style={ inputStyle }        
                 secureTextEntry = { secureTextEntry }
                 placeholder = { placeholder }
                 autoCorrect = { false } 
-                style={ inputStyle }
                 value={ value }
                 onChangeText={ onChangeText } 
             />
         </View>
-    );
+    )
 };
 
-styles = {
+const styles = {
     inputStyle: {
-
         color: '#000',
         paddingRight: 5,
         paddingLeft: 5,

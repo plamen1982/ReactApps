@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import firebase from 'firebase';
 import moment from 'moment';
-import { Header, Button, Spinner } from './components/common';
+import { Header, Button, Spinner, CardSection } from './components/common';
 import LoginForm from './components/LoginForm';
 
 export default class App extends React.Component {
@@ -17,10 +17,11 @@ export default class App extends React.Component {
       projectId: "authentication-7c212",
       storageBucket: "authentication-7c212.appspot.com",
       messagingSenderId: "183675921688"
-    });
+    })
     // console.log('Firebase were mounted from App!')
     firebase.auth().onAuthStateChanged((user)=>{
       if (user){
+        console.log(user)
         this.setState({ loggedIn: true })
       }
       else {
@@ -32,7 +33,9 @@ export default class App extends React.Component {
   renderContent() {
       switch (this.state.loggedIn){
         case true:
-          return <Button>Log out</Button>;
+          return (
+            <CardSection><Button onPress={()=> firebase.auth().signOut()}>Log out</Button></CardSection>
+        )
         case false:
           return <LoginForm />;
         default:
@@ -42,7 +45,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View >
+      <View>
         <Header  headerText = "Authentication"/>
         { this.renderContent() }
       </View>

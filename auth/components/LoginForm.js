@@ -8,19 +8,17 @@ class LoginForm extends Component{
 
     onButtonPress() {
         console.log('Button were pressed from Login form!')
-
         const { email, password } = this.state;
-
-
-
         this.setState({ error: '', loading: true });
 
         firebase.auth().signInWithEmailAndPassword(email, password)
+        
             .then(this.onLoginSuccess.bind(this))
             .catch(()=>{
                 firebase.auth().createUserWithEmailAndPassword(email, password) 
                     .then(this.onLoginSuccess.bind(this))
-                    .catch(this.onLoginFail.bind(this));
+                    .catch(this.onLoginFail.bind(this))
+        
         })
     }
     onLoginFail() {
@@ -65,7 +63,6 @@ class LoginForm extends Component{
                         label="Password"
                         value={this.state.password}
                         onChangeText={password => this.setState({ password })}
-
                     />
                 </CardSection>
                 <Text style={styles.errorTextStyle}>

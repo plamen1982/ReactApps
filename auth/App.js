@@ -7,7 +7,7 @@ import LoginForm from './components/LoginForm';
 
 export default class App extends React.Component {
 
-  state = { loggedIn: null }
+   state = { loggedIn: null }
 
   componentWillMount(){
      firebase.initializeApp({

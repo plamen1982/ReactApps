@@ -31,4 +31,5 @@ const mapStateToProps = state => {
     return { libraries: state.libraries };
 };
 
+//first argument of the connector will be always mapStateToProps
 export default connect(mapStateToProps)(LibraryList);

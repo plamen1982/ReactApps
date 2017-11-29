@@ -1,5 +1,10 @@
-//reducers are always called with first argument state and second argument actions
-export default (state, action) => {
-    console.log(action);
-    return null;
+//reducers by convention, always called with first argument state and second argument actions
+export default (state = null, action) => {
+    switch (action.type) {
+        case 'select_library':
+            return action.payload;
+        default:
+            return state;
+    }
 };
+

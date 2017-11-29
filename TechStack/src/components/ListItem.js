@@ -8,7 +8,7 @@ class ListItem extends Component {
 
     render() {
     const { titleStyle } = styles;
-    const { id, title } = this.props.library
+    const { id, title } = this.props.library;
         return (
             <TouchableWithoutFeedback
                     onPress={()=> this.props.selectLibrary(id)}

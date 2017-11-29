@@ -7,9 +7,9 @@ import * as actions from '../actions';
 class ListItem extends Component {
 
     renderDescription() {
-        const { library, selectedLibraryId } = this.props;
+        const { library, expanded } = this.props;
 
-        if (library.id === selectedLibraryId) {
+        if (expanded) {
             return <Text>{library.description}</Text>;
         }
     }
@@ -42,8 +42,11 @@ const styles = {
     }
 };
 
-const mapStateToProps = state => {
-    return { selectedLibraryId: state.selectedLibraryId };
+//by convention second argument of mapStateToProps is a ownProps that is equal to this.props in this component
+const mapStateToProps = (state, ownProps) => {
+    const expanded = state.selectedLibraryId === ownProps.library.id;
+
+    return { expanded };
 };
 //first argument of the connect helper will be always mapStateToProps, the second argument
 //we will passing actions that will attached these actions to this.porps in the ListItem component

@@ -1,23 +1,36 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import firebase from 'firebase';
 
-export default class App extends React.Component {
+import reducers from './src/reducers';
+import LoginForm from './src/components/LoginForm'
+
+class App extends Component {
+
+  componentWillMount(){
+    const config = {
+      apiKey: 'AIzaSyDVLffdyGqlMeT1O-fAXXoPSWySowDRalo',
+      authDomain: 'manager-140f5.firebaseapp.com',
+      databaseURL: 'https://manager-140f5.firebaseio.com',
+      projectId: 'manager-140f5',
+      storageBucket: 'manager-140f5.appspot.com',
+      messagingSenderId: '1024908524621'
+    };
+
+    firebase.initializeApp(config)
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Provider store={createStore(reducers)}>
+          <LoginForm>
+          </LoginForm>
+      </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+

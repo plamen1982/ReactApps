@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Card, CardSection, Input, Button } from './common';
-import { emailChanged } from '../actions';
+import { emailChanged, passwordChanged } from '../actions';
 
 class LoginForm extends Component {
 
@@ -10,6 +10,9 @@ class LoginForm extends Component {
         this.props.emailChanged(text);
     }
 
+    onChangePassword(text){
+        this.props.passwordChanged(text)
+    }
     render(){
         return(
             <Card>
@@ -26,6 +29,8 @@ class LoginForm extends Component {
                     <Input
                         label = "password"
                         secureTextEntry
+                        onChangeText = {this.onChangePassword.bind(this)}
+                        value = {this.props.password}
                     />
                 </CardSection>
 
@@ -40,9 +45,12 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = (state) => {
+    
     return {
-        email: state.auth.email
+        email: state.auth.email,
+        password: state.auth.password
     }
 }
-
-export default connect(mapStateToProps, { emailChanged })(LoginForm);
+// connect first argument mapStateToProps, second will be the reducers.
+//Second execution of the connect function is the component that will apply updated state 
+export default connect(mapStateToProps, { emailChanged, passwordChanged })(LoginForm);

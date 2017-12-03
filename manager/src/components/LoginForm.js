@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Card, CardSection, Input, Button } from './common';
@@ -18,6 +19,18 @@ class LoginForm extends Component {
         const { email, password } = this.props;
 
         this.props.loginUser({ email, password });
+       
+    }
+
+    renderError(){
+        console.log(`render error ${this.props.error}`)
+        if(this.props.error){
+            return(
+                <View style={{ backgroundColor: 'white' }}>
+                    <Text style={ styles.textErrorStyle }>{ this.props.error }</Text>
+                </View>
+            )
+        }
     }
 
     render(){
@@ -40,7 +53,7 @@ class LoginForm extends Component {
                         value = {this.props.password}
                     />
                 </CardSection>
-
+                    {this.renderError()}
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>
                         Login
@@ -52,10 +65,19 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = (state) => {
-    
+
     return {
         email: state.auth.email,
-        password: state.auth.password
+        password: state.auth.password,
+        error: state.auth.error
+    }
+}
+
+const styles = {
+    textErrorStyle: {
+        fontSize: 20,
+        color: 'red',
+        alignSelf: 'center'
     }
 }
 // connect first argument mapStateToProps, second will be the reducers.

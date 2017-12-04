@@ -6,7 +6,7 @@ import ReduxThunk from 'redux-thunk';
 import Router from './src/Router';
 
 import reducers from './src/reducers';
-
+// import LoginForm from './src/components/LoginForm';
 class App extends Component {
 
   componentWillMount(){

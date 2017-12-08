@@ -95,7 +95,8 @@ const styles = {
         alignSelf: 'center'
     }
 }
-// connect first argument mapStateToProps, second will be the reducers.
+// connect first argument mapStateToProps, second will be the action creator methods, they return plain object( the Action ) .
+//With this Action, we will update the global state.
 //Second execution of the connect function is the component that will apply updated state 
 export default connect(mapStateToProps, { 
     emailChanged, passwordChanged, loginUser })(LoginForm);

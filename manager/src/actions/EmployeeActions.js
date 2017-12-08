@@ -21,8 +21,7 @@ export const employeeCreate = ({ name, phone, shift }) => {
     //users/currentUser.id/employees follow our JSON structure of the database in firebase with our current user
     firebase.database().ref(`/users/${currentUser.uid}/employees`)
         .push({ name, phone, shift })
-        //after create a new employee return back to EmployeeList scene
-        .then(() => Actions.employeeList())
+        .then(() => Actions.employeeList({ type: 'reset' }))
     }
     
  }

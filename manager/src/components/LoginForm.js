@@ -35,7 +35,6 @@ class LoginForm extends Component {
 
     renderButton(){
         if(this.props.loading){
-            console.log(this.props.loading)
             return(
                 <Spinner size='large'/>
             )
@@ -69,7 +68,6 @@ class LoginForm extends Component {
                     />
                 </CardSection>
                     {this.renderError()}
-                    {console.log('after renderError')}
                 <CardSection>
                     {this.renderButton()}
                 </CardSection>

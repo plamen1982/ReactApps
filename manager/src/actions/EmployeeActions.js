@@ -1,7 +1,8 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import { 
-    EMPLOYEE_UPDATE
+    EMPLOYEE_UPDATE,
+    EMPLOYEE_CREATE
  } from './types';
 
 
@@ -17,11 +18,15 @@ export const employeeCreate = ({ name, phone, shift }) => {
     //extract current user from firebase
     const { currentUser }  = firebase.auth(); 
     // we returning object so we can pass the requirement of redux-thunk that ActionCreator needs to return a plain object(Action)
-    return() => {
+    return(dispatch) => {
     //users/currentUser.id/employees follow our JSON structure of the database in firebase with our current user
     firebase.database().ref(`/users/${currentUser.uid}/employees`)
         .push({ name, phone, shift })
-        .then(() => Actions.employeeList({ type: 'reset' }))
+        .then(() => {
+            dispatch({type: EMPLOYEE_CREATE})
+            Actions.employeeList({ type: 'reset' })
+            }
+        )
     }
     
  }

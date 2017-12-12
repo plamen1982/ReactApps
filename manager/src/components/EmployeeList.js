@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { ListView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
@@ -7,6 +8,7 @@ import { employeesFetch } from '../actions';
 class EmployeeList extends Component{
 
     componentWillMount(){
+
         this.props.employeesFetch();
         this.createDataSource(this.props)
 
@@ -28,6 +30,7 @@ class EmployeeList extends Component{
     }
 
     render(){
+        console.log(this.props)
         return(
             <View>
                 <Text>EmployeeList</Text>
@@ -42,10 +45,13 @@ const styles = {
     }
 }
 
-const mapStateToPros = (state) => {
-    return {
-        employeeList: state.employeesList
-    }
-}
+const mapStateToProps = state => {
+    //(val is going to be the value(the employee model with props: name, phone, shift),
+    // uid is going to be the key)
+    const employees = _.map(state.employees, (val, uid) => {
+        return { ...val, uid };
+    });
+    return { employees }
+};
 
-export default connect(mapStateToPros, { employeesFetch })(EmployeeList);
+export default connect(mapStateToProps, { employeesFetch })(EmployeeList);

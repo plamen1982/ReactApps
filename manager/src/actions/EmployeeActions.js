@@ -24,21 +24,23 @@ export const employeeCreate = ({ name, phone, shift }) => {
     firebase.database().ref(`/users/${currentUser.uid}/employees`)
         .push({ name, phone, shift })
         .then(() => {
-            dispatch({type: EMPLOYEE_CREATE})
+            dispatch({ type: EMPLOYEE_CREATE })
             Actions.employeeList({ type: 'reset' })
             }
         )
     }
  }
 
- export const EmployeeFetch = () => {
-     const currentUser = firebase.auth();
-
+ //once employeeFetch() is started it will work all the time
+ export const employeesFetch = () => {
+     const { currentUser } = firebase.auth();
+     
      return(dispatch) => {
-         firebase.database().ref(`/users${currentUser.uid}/employees`)
-         .on('value', spanshot => {
-             dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: spanshot.val() })
-         })
+         //witch the watcher .on() every time when data is added/changed it will update the snapshot(object that describe the data)         
+         firebase.database().ref(`/users/${currentUser.uid}/employees`)
+            .on('value', spanshot => {
+                dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: spanshot.val() })
+            })
      }
  }
 

@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { ListView } from 'react-native';
+import { ListView, TouchableWithoutFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
-import  ListItem  from './ListItem'
+import { Actions } from 'react-native-router-flux';
 
+import  ListItem  from './ListItem'
 import { employeesFetch } from '../actions';
 
 class EmployeeList extends Component{
@@ -25,20 +26,19 @@ class EmployeeList extends Component{
     }
 
     //each time when we receive new objects from firebase our dataSource will be updated
-    createDataSource({ employees }){
+    createDataSource({ employees }) {
         const ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2
+          rowHasChanged: (r1, r2) => r1 !== r2
         });
-
-        this.dataSource = ds.cloneWithRows(this.props.employees)
-        
-    }
+    
+        this.dataSource = ds.cloneWithRows(employees);
+      }
 
     renderRow(employee) {
-
-        return <ListItem employee = {employee} />
-
-    }
+        
+                return <ListItem employee = {employee} />
+        
+            }
 
     render(){
         return(
@@ -47,21 +47,18 @@ class EmployeeList extends Component{
                 dataSource = {this.dataSource}
                 renderRow = {this.renderRow}
             />
+
         )
     }
 }
 
 
 const mapStateToProps = state => {
-    //convert object from firebase(state.employees) to an array
-    //(val is going to be the value(the employee model with props: name, phone, shift),
-    // uid is going to be the unique key that coming from firebase)
     const employees = _.map(state.employees, (val, uid) => {
-        //end result in every object in this array will be [{ shift: 'Monday', phone: '5153' name: 'someName', uid: 'jasdfdfi830jf' }, {...}]
-        return { ...val, uid };
+      return { ...val, uid };
     });
-
-    return { employees }
-};
+  
+    return { employees };
+  };
 
 export default connect(mapStateToProps, { employeesFetch })(EmployeeList);

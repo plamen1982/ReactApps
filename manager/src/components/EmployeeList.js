@@ -1,31 +1,22 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
-import { ListView, TouchableWithoutFeedback, View } from 'react-native';
+import { ListView } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import _ from 'lodash';
 
-import  ListItem  from './ListItem'
+import ListItem from './ListItem';
 import { employeesFetch } from '../actions';
 
-class EmployeeList extends Component{
+class EmployeeList extends Component {
 
-    componentWillMount(){
-
+    componentWillMount() {
         this.props.employeesFetch();
-        this.createDataSource(this.props)
-        
-
+        this.createDataSource(this.props);
     }
 
     componentWillReceiveProps(nextProps) {
-        //nextProps are the next set of props that this component
-        //will be rendered where
-        //this.props is still the old set of props
-        this.createDataSource(nextProps)
-
+        this.createDataSource(nextProps);
     }
 
-    //each time when we receive new objects from firebase our dataSource will be updated
     createDataSource({ employees }) {
         const ds = new ListView.DataSource({
           rowHasChanged: (r1, r2) => r1 !== r2
@@ -35,17 +26,15 @@ class EmployeeList extends Component{
       }
 
     renderRow(employee) {
-        
-                return <ListItem employee = {employee} />
-        
+                return <ListItem employee={employee} />;
             }
 
-    render(){
-        return(
+    render() {
+        return (
             <ListView
                 enableEmptySections
-                dataSource = {this.dataSource}
-                renderRow = {this.renderRow}
+                dataSource={this.dataSource}
+                renderRow={this.renderRow}
             />
 
         )

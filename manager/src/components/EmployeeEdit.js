@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Communications from 'react-native-communications';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 import EmployeeForm from './EmployeeForm';
 import { Button, CardSection, Card, Confirm } from './common';
 import { employeeUpdate, employeeSave, employeeDelete } from '../actions';
-import { connect } from 'react-redux';
 
 class EmployeeEdit extends Component {
     state = { showModal: false }
@@ -22,13 +22,13 @@ class EmployeeEdit extends Component {
     }
 
     onTextMessage() {
-      const { phone, shift } = this.props
+      const { phone, shift } = this.props;
 
       Communications.text(phone, `Your upcomoning shift is ${shift}`);
     }
 
     onAccept() {
-      const { uid } = this.props.employee
+      const { uid } = this.props.employee;
 
       this.props.employeeDelete({ uid });
     }
@@ -78,6 +78,7 @@ class EmployeeEdit extends Component {
     return { name, phone, shift };
   };
   
-  export default connect(mapStateToProps, { employeeUpdate, employeeSave, employeeDelete })(EmployeeEdit);
-
-
+export default connect(mapStateToProps, { 
+  employeeUpdate, 
+  employeeSave, 
+  employeeDelete })(EmployeeEdit);

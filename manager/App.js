@@ -3,13 +3,13 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
-import Router from './src/Router';
 
+import Router from './src/Router';
 import reducers from './src/reducers';
-// import LoginForm from './src/components/LoginForm';
+
 class App extends Component {
 
-  componentWillMount(){
+  componentWillMount() {
     const config = {
       apiKey: 'AIzaSyDVLffdyGqlMeT1O-fAXXoPSWySowDRalo',
       authDomain: 'manager-140f5.firebaseapp.com',
@@ -19,16 +19,14 @@ class App extends Component {
       messagingSenderId: '1024908524621'
     };
 
-    firebase.initializeApp(config)
+    firebase.initializeApp(config);
   }
 
   render() {
-    //second argument is for any initial state and third argument 
-    //is a store enhancer because we add more functionallity to our app. The dispach functionallity
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
     return (
-      <Provider  store={store}>
+      <Provider store={store}>
           <Router />
       </Provider>
     );

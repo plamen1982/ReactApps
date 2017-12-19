@@ -1,3 +1,6 @@
+import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
+
 import { 
     EMAIL_CHANGED,
     PASSWORD_CHANGED,
@@ -6,8 +9,6 @@ import {
     LOGIN_USER
 } from './types';
 
-import firebase from 'firebase';
-import { Actions } from 'react-native-router-flux';
 
 export const emailChanged = (text) => {
     return {
@@ -20,35 +21,31 @@ export const passwordChanged = (text) => {
     return {
         type: PASSWORD_CHANGED,
         payload: text
-    }
-}
+    };
+};
 
 
-//dispatch - sending the action to the different reducers in out app
-export const loginUser = ({email, password}) => {
-    //return a dispatch as a first argument. where dispatch is a method
-    return(dispatch) => {
+export const loginUser = ({ email, password }) => {
+    return (dispatch) => {
         dispatch({ type: LOGIN_USER })
 
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(user => loginUserSuccess(dispatch, user))
-            //dispatch will return the action after we received the user from firebase
-        .catch(()=>{
-
+        .catch(() => {
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(user => loginUserSuccess(dispatch, user))
-            .catch(()=> loginUserFail(dispatch));
-        })
-    }
-}
+            .catch(() => loginUserFail(dispatch));
+        });
+    };
+};
 
 const loginUserFail = (dispatch) => {
-    dispatch({type: LOGIN_USER_FAIL})
-}
+    dispatch({ type: LOGIN_USER_FAIL });
+};
 
 const loginUserSuccess = (dispatch, user) => {
-    dispatch({ type: LOGIN_USER_SUCCESS, payload: user })
+    dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
 
-    Actions.main()
+    Actions.main();
 
-}
+};

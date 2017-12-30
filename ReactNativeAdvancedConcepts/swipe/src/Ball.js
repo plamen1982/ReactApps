@@ -14,7 +14,7 @@ class Ball extends Component {
     render() {
         return(
 //3. Which element are we moving Animated.View style={this.position.getLayout()}, 
-//style is taking this.position properties to create the animation
+//Animated.View inspect the style and with this.position properties extracting the information to create the animation
             
         <Animated.View style={this.position.getLayout()}>
             <View style={styles.ball} />

@@ -13,7 +13,7 @@ class Ball extends Component {
 
     render() {
         return(
-//3. Which element are we moving Animated.View style={this.position.getLayout()}, 
+//3. Which element are we moving? Animated.View style={this.position.getLayout()}, 
 //Animated.View inspect the style and with this.position properties extracting the information to create the animation
             
         <Animated.View style={this.position.getLayout()}>

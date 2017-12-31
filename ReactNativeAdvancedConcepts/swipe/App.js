@@ -53,3 +53,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
 });
+
+/**Animated System:
+ * 1. Where the item is right now?
+ * 2. Where we moving elment to?
+ * 3. Which element are we moving?
+ */
+
+/**Gesture System:
+ * 1. What are we touching?
+ * 2. What component handles touch?
+ * 3. How is the gesture changing?
+ */

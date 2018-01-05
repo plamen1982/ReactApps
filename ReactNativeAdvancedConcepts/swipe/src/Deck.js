@@ -54,9 +54,9 @@ class Deck extends Component {
         const { onSwipeRight, onSwipeLeft, data } = this.props;
         const item = data[this.state.index]
 
-        direction === 'right' ? onSwipeRight(item) : onSwipeRight(item)
+        direction === 'right' ? onSwipeRight(item) : onSwipeLeft(item)
         this.state.position.setValue({ x: 0, y: 0 })
-        this.setState({ inex: this.state.index + 1 });
+        this.setState({ index: this.state.index + 1 });
 
     }
 
@@ -78,7 +78,12 @@ class Deck extends Component {
             transform: [{ rotate }]
         }
     }
+
     renderCards() {
+        if (this.state.index >= this.props.data.length) {
+            return this.props.renderNoMoreCards();
+        }
+        
         return this.props.data.map((item, i) => {
             if(i < this.state.index) { return null }
 

@@ -58,10 +58,8 @@ export const employeeCreate = ({ name, phone, shift }) => {
      return () => {
          firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
          .remove()
-         .then( () => {
-
+         .then(() => {
             Actions.employeeList({ type: 'reset' });
-         
          });
      };
  };

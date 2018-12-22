@@ -16,14 +16,22 @@ export default class App extends React.Component {
   
   constructor(props) {
     super(props);
-    this.state = { location: 'San Fransico'};
+    this.state ={
+      location: '',
+    }
   }
+
+componentDidMount() {
+  this.handleUpdateLocation('San Fransico');
+}
 
   handleUpdateLocation = city => {
     this.setState({
       location: city,
     });
   }
+
+
 
   render() {
     const { location } = this.state;

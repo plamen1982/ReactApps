@@ -1,17 +1,9 @@
 {
   "expo": {
-    "name": "wheather-app",
-    "description": "Type your favourite major city in the world and see the weather there with cool picture for background",
-    "slug": "wheather-app",
+    "name": "time-tracking",
+    "slug": "time-tracking",
     "privacy": "public",
     "sdkVersion": "31.0.0",
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "Wheather app"
-    },
-    "android": {
-      "package": "Wheather app"
-    },
     "platforms": [
       "ios",
       "android"
@@ -29,6 +21,9 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
   }
 }

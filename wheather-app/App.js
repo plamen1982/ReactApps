@@ -79,7 +79,7 @@ export default class App extends React.Component {
             <View>
               <Text style={[styles.largeText, styles.textStyle]}>{location}</Text>
               <Text style={[styles.largeText, styles.textStyle]}>{`${weather}`}</Text>
-              <Text style={[styles.largeText, styles.textStyle]}>{`${Math.round(temperature)} degree`}</Text>
+              <Text style={[styles.largeText, styles.textStyle]}>{`${Math.round(temperature)} \u2103`}</Text>
             </View>
           )}
 

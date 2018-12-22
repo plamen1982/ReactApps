@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   StyleSheet,
   View,
@@ -6,54 +6,90 @@ import {
   Text,
   KeyboardAvoidingView,
   Platform,
-} from 'react-native';
+  ActivityIndicator,
+  StatusBar
+} from "react-native";
 
-import getImageForWeather from './utils/getImageForWeather';
-
-import SearchInput from './components/SearchInput';
+import { fetchLocationId, fetchWeather } from "./utils/api";
+import getImageForWeather from "./utils/getImageForWeather";
+import SearchInput from "./components/SearchInput";
 
 export default class App extends React.Component {
-  
   constructor(props) {
     super(props);
-    this.state ={
-      location: '',
-    }
+    this.state = {
+      loading: false,
+      error: false,
+      location: "",
+      temperature: 0,
+      weather: "",
+    };
   }
 
-componentDidMount() {
-  this.handleUpdateLocation('San Fransico');
-}
+  componentDidMount() {
+    this.handleUpdateLocation('Sofia');
+  }
 
-  handleUpdateLocation = city => {
-    this.setState({
-      location: city,
+  handleUpdateLocation = async city => {
+    if(!city) return;
+
+    this.setState({ loading: true}, async() => {
+      try {
+        const locationId = await fetchLocationId(city);
+        const { location, weather, temperature } = await fetchWeather(locationId);
+
+        this.setState({
+          loading: false,
+          error: false,
+          location,
+          weather,
+          temperature,
+        })
+      } catch(e) {
+        this.setState({
+          loading: false,
+          error: true,
+        });
+      }
     });
-  }
-
-
+  };
 
   render() {
-    const { location } = this.state;
+    const { loading, location, error, weather, temperature } = this.state;
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <StatusBar barStyle="light-content" backgroundColor="blue"/>
         <ImageBackground
-          source={getImageForWeather('Clear')}
+          source={getImageForWeather("Clear")}
           style={styles.imageContainer}
           imageStyle={styles.image}
         >
           <View style={styles.detailsContainer}>
-            <Text style={[styles.largeText, styles.textStyle]}>
-              {location}
-            </Text>
-            <Text style={[styles.smallText, styles.textStyle]}>
-              Light Cloud
-            </Text>
-            <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
+          <ActivityIndicator animating={loading} color="white" size="large"/>
+          {!loading && (
+            <View>
+              {error && (
+                <Text style={[styles.smallText, styles.textStyle]}>
+                  Could not load weather, please try a differect city.
+                </Text>
+              )}
+            </View>
+          )}
+          {!error && (
+            <View>
+              <Text style={[styles.largeText, styles.textStyle]}>{location}</Text>
+              <Text style={[styles.largeText, styles.textStyle]}>{`${weather}`}</Text>
+              <Text style={[styles.largeText, styles.textStyle]}>{`${Math.round(temperature)} degree`}</Text>
+            </View>
+          )}
 
-            <SearchInput onSubmit={this.handleUpdateLocation} placeholder="Search any city" />
+            <SearchInput
+              onSubmit={this.handleUpdateLocation}
+              placeholder="Search any city"
+            />
           </View>
         </ImageBackground>
+
       </KeyboardAvoidingView>
     );
   }
@@ -62,32 +98,32 @@ componentDidMount() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#34495E',
+    backgroundColor: "#34495E"
   },
   imageContainer: {
-    flex: 1,
+    flex: 1
   },
   image: {
     flex: 1,
     width: null,
     height: null,
-    resizeMode: 'cover',
+    resizeMode: "cover"
   },
   detailsContainer: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.2)',
-    paddingHorizontal: 20,
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.2)",
+    paddingHorizontal: 20
   },
   textStyle: {
-    textAlign: 'center',
-    fontFamily: Platform.OS === 'ios' ? 'AvenirNext-Regular' : 'Roboto',
-    color: 'white',
+    textAlign: "center",
+    fontFamily: Platform.OS === "ios" ? "AvenirNext-Regular" : "Roboto",
+    color: "white"
   },
   largeText: {
-    fontSize: 44,
+    fontSize: 44
   },
   smallText: {
-    fontSize: 18,
-  },
+    fontSize: 18
+  }
 });

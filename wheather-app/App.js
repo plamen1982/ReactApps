@@ -58,9 +58,9 @@ export default class App extends React.Component {
     const { loading, location, error, weather, temperature } = this.state;
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <StatusBar barStyle="light-content" backgroundColor="blue"/>
+        <StatusBar barStyle="light-content"/>
         <ImageBackground
-          source={getImageForWeather("Clear")}
+          source={getImageForWeather(weather)}
           style={styles.imageContainer}
           imageStyle={styles.image}
         >

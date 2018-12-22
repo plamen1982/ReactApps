@@ -46,15 +46,16 @@ export default class SearchInput extends React.Component {
       </View>
     );
   }
-}
 
-SearchInput.propTypes = {
-  onSumbit: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-}
+  static propTypes = {
+    onSumbit: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+  }
+  
+  static defaultProps = {
+    placeholder: '',
+  }
 
-SearchInput.defaultProps = {
-  placeholder: '',
 }
 
 const styles = {

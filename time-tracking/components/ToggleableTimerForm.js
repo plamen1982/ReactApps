@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
     buttonPadding: {
         paddingHorizontal: 15,
     },
-})
+});

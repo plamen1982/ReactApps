@@ -4,8 +4,8 @@ import TimerForm from './TimerForm';
 import Timer from './Timer';
 
 //Stateful Component 
-//- 1. props are defined here; 2. they are not changed 
-//from other state or props and; 3. also they changed over time.
+//- 1. props(editFormOpen) is defined here; 2. they is not changed 
+//from other state or props and; 3. also is changed over time.
 
 export default class EditableTimer extends React.Component {
     state = {

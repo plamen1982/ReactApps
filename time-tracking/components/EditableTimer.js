@@ -1,7 +1,7 @@
 import React from 'react';
 
-// import TimerForm from './TimerForm';
-// import Timer from './Timer';
+import TimerForm from './TimerForm';
+import Timer from './Timer';
 
 export default function EditableTimer({
     id,
@@ -11,16 +11,16 @@ export default function EditableTimer({
     isRunning,
     editFormOpen,
 }) {
-    // if(editFormOpen) {
-    //     return <TimerForm id={id} title={title} project={project} />
-    // }
+    if(editFormOpen) {
+        return <TimerForm id={id} title={title} project={project} />
+    }
 
-    // return(
-    // <Timer
-    //     id={id}
-    //     title={title}
-    //     project={project}
-    //     elapsed={elapsed}
-    //     isRunning={isRunning}
-    // />);
+    return(
+    <Timer
+        id={id}
+        title={title}
+        project={project}
+        elapsed={elapsed}
+        isRunning={isRunning}
+    />);
 }

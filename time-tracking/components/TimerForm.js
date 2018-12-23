@@ -2,7 +2,10 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 
 import TimerButton from './TimerButton';
-
+//Stateful
+//1.TimerButton include TextInput component this can be special 
+//state managers in their own right – these components often 
+//maintain the value of the input field as state.
 export default function TimerForm({ id, title, project }) {
     const submitText = id ? 'Update' : 'Create';
 

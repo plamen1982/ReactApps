@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 
 import { millisecondsToHuman } from "../utils/TimerUtils";
 import TimerButton from "./TimerButton";
-
+//Stateless component - 1. props are passed down from a parent
 export default function Timer({ title, project, elapsed }) {
   const elapsedString = millisecondsToHuman(elapsed);
   return (

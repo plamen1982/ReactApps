@@ -12,7 +12,7 @@ export default class App extends React.Component {
             <Text style={styles.title}>Timers</Text>
           </View>
           <ScrollView style={styles.timerList}>
-            <ToggleableTimerForm isOpen={false} />
+            <ToggleableTimerForm isOpen={true} />
             <EditableTimer 
               id="1"
               title="Mow the lawn"

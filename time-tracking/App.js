@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  ScrollView,
+  KeyboardAvoidingView,
+} from "react-native";
 import uuidv4 from "uuid/v4";
 
 import { newTimer } from "./utils/TimerUtils";
@@ -118,6 +124,10 @@ export default class App extends React.Component {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Timers</Text>
         </View>
+        <KeyboardAvoidingView
+          behavior="padding"
+          style={styles.timerListContainer}
+        >
         <ScrollView style={styles.timerList}>
           <ToggleableTimerForm onFormSubmit={this.handleCreateFormSubmit} />
           {timers.map(({ id, title, project, elapsed, isRunning }) => (
@@ -135,6 +145,7 @@ export default class App extends React.Component {
             />
           ))}
         </ScrollView>
+        </KeyboardAvoidingView>
       </View>
     );
   }
@@ -157,5 +168,8 @@ const styles = StyleSheet.create({
   },
   timerList: {
     paddingBottom: 15
-  }
+  },
+  timerListContainer: {
+    flex: 1,
+  },
 });

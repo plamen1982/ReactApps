@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 export default function Avatar ({ size, backgroundColor, initials }) {
@@ -10,8 +10,20 @@ export default function Avatar ({ size, backgroundColor, initials }) {
         backgroundColor
     }
     return (
-        <View style={style}/>
+        <View style={[styles.container, style]}>
+            <Text style={styles.text}>{ initials }</Text>
+        </View>
     )
+}
+
+const styles = {
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    text: {
+        color: 'white',
+    }
 }
 
 Avatar.propTypes = {

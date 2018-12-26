@@ -54,10 +54,12 @@ export default class App extends React.Component {
   };
 
   handleRemovePress = timerId => {
+
     this.setState({
       timers: this.state.timers.filter(t => t.id !== timerId),
     })
   }
+
   render() {
     const { timers } = this.state;
     return (

@@ -5,9 +5,12 @@ import { millisecondsToHuman } from "../utils/TimerUtils";
 import TimerButton from "./TimerButton";
 //Stateless component - 1. props are passed down from a parent
 export default class Timer extends React.Component {
-
-  render() {
-    const { elapsed, title, project, onEditPress } = this.props;
+  handleRemovePress = () => {
+    const { id, onRemovePress } = this.props;
+    onRemovePress(id);
+  }
+  render() { 
+    const { elapsed, title, project, onEditPress, onRemovePress } = this.props;
     const elapsedString = millisecondsToHuman(elapsed);
     
     return (
@@ -17,7 +20,7 @@ export default class Timer extends React.Component {
         <Text style={styles.elapsedTime}>{elapsedString}</Text>
         <View style={styles.buttonGroup}>
           <TimerButton color="blue" small title="Edit" onPress={onEditPress}/>
-          <TimerButton color="blue" small title="Remove" />
+          <TimerButton color="blue" small title="Remove" onPress={this.handleRemovePress}/>
         </View>
         <TimerButton color="#21BA45" title="Start" />
       </View>

@@ -21,16 +21,17 @@ export default class TimerForm extends React.Component {
 
     handleTitleChange = title => {
         this.setState({ title });
-
     }
+
     handleProjectChange = project => {
         this.setState({ project });
     }
 
     handleSubmit = () => {
+
         const { onFormSubmit, id } = this.props;
         const { title, project } = this.state;
-        
+   
         onFormSubmit({
             id,
             title,

@@ -7,7 +7,7 @@ export default function Avatar ({ size, backgroundColor, initials }) {
         width: size,
         height: size,
         borderRadius: size / 2,
-        backgroundColor
+        backgroundColor,
     }
     return (
         <View style={[styles.container, style]}>

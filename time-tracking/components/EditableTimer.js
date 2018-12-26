@@ -3,11 +3,26 @@ import React from "react";
 import TimerForm from "./TimerForm";
 import Timer from "./Timer";
 
+import PropTypes from 'prop-types';
+
 //Stateful Component
 //- 1. prop(editFormOpen) is defined here; 2. it is not changed
 //from other state or props and; 3. also is changed over time.
 
 export default class EditableTimer extends React.Component {
+
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    project: PropTypes.string.isRequired,
+    elapsed: PropTypes.number.isRequired, 
+    isRunning: PropTypes.bool.isRequired,
+    onFormSubmit: PropTypes.func.isRequired, 
+    onRemovePress: PropTypes.func.isRequired,
+    onStartPress: PropTypes.func.isRequired,
+    onStopPress: PropTypes.func.isRequired,
+  }
+
   state = {
     editFormOpen: false
   };

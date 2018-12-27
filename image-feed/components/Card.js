@@ -17,7 +17,7 @@ export default class Card extends React.Component {
     fullname: PropTypes.string.isRequired,
     image: Image.propTypes.source.isRequired,
     linkText: PropTypes.string,
-    onPressLinkText: PropTypes.func
+    onPressLinkText: PropTypes.func,
   };
 
   static defaultProps = {
@@ -47,8 +47,8 @@ export default class Card extends React.Component {
         </View>
       </View>
     );
-  }
-}
+  };
+};
 
 const styles = StyleSheet.create({
   image: {

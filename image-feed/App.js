@@ -4,12 +4,8 @@ import { Constants } from 'expo';
 
 import Feed from './screens/Feed';
 
-const data = [
-  { id: 0, author: "Bob Ross" },
-  { id: 1, author: "Chuck Norris" }
-]
-
 export default class App extends React.Component {
+
   render() {
     return (
       <View style={styles.container}>

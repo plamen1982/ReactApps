@@ -12,7 +12,7 @@ export default class App extends React.Component {
           fullname={'Plamen Hristov'}
           linkText={'Comments'}
           onPressLinkText={() => { console.log('Pressed link!'); }}
-          image={{ uri: 'https://unsplash.it/600/600' }}
+          image={{ uri: 'https://unsplash.it/600/600' }}      image={{ uri: 'https://unsplash.it/600/600' }}
         />
 
       </View>

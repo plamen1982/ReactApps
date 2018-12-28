@@ -6,7 +6,7 @@ export default function NavigationBar({ title, leftText, onPressLeftText }) {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.leftText} onPress={onPressLeftText}>
-            <Text>{leftText}</Text>
+                <Text>{leftText}</Text>
             </TouchableOpacity>
             <Text style={styles.title}>{title}</Text>
         </View>

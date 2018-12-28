@@ -43,6 +43,7 @@ export default class CardList extends React.Component {
         data={items}
         renderItem={this.renderItem}
         keyExtractor={keyExtractor}
+        extraData={commentsForItem}
       />
     );
   }

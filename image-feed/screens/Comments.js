@@ -23,7 +23,7 @@ export default function Comments({
                 placeholder="Leave a comment"
                 onSubmit={onSubmitComment}
             />
-            <CommentList />
+            <CommentList items={comments}/>
         </SafeAreaView>
     )
 }

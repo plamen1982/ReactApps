@@ -1,40 +1,49 @@
-import React from 'react';
-import { FlatList } from 'react-native';
-import PropTypes from 'prop-types';
-import { getImageFromId } from '../utils/api';
-import Card from './Card';
+import React from "react";
+import { FlatList } from "react-native";
+import PropTypes from "prop-types";
+import { getImageFromId } from "../utils/api";
+import Card from "./Card";
 
 const keyExtractor = ({ id }) => id.toString();
 
 export default class CardList extends React.Component {
-    static propTypes = {
-        items: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.number.isRequired,
-                author: PropTypes.string.isRequired,
-            }),
-        ).isRequired,
-    }
+  static propTypes = {
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        author: PropTypes.string.isRequired
+      })
+    ).isRequired,
+    commentsForItem: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string))
+      .isRequired,
+    onPressComments: PropTypes.func.isRequired
+  };
 
-    renderItem = ({ item: { id, author } }) => {
-        return (
-        <Card 
-            fullname={author}
-            image={{ 
-                uri: getImageFromId(id), 
-        }}     
+  renderItem = ({ item: { id, author } }) => {
+    const { commentsForItem, onPressComments } = this.props;
+    const comments = commentsForItem[id];
+
+    return (
+      <Card
+        fullname={author}
+        image={{
+          uri: getImageFromId(id)
+        }}
+        linkText={`${comments ? comments.length : 0} Comments`}
+        onPressLinkText={() => onPressComments(id)}
       />
-    )}
+    );
+  };
 
-    render() {
-        const { items } = this.props;
+  render() {
+    const { items } = this.props;
 
-        return(
-            <FlatList 
-                data={items}
-                renderItem={this.renderItem}
-                keyExtractor={keyExtractor}
-            />
-        );
-    }
+    return (
+      <FlatList
+        data={items}
+        renderItem={this.renderItem}
+        keyExtractor={keyExtractor}
+      />
+    );
+  }
 }

@@ -1,11 +1,32 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, View, Text } from "react-native";
 
 export default class App extends React.Component {
+
+  renderMessageList = () => {
+    return (
+      <View style={styles.content}><Text>1</Text></View>
+    );
+  }
+
+  renderInputMethodEditor = () => {
+    return (
+      <View style={styles.inputMethodEditor}><Text>2</Text></View>
+    );
+  }
+
+  renderToolbar = () => {
+    return (
+        <View style={styles.toolbar}><Text>3</Text></View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        {this.renderMessageList()}
+        {this.renderToolbar()}
+        {this.renderInputMethodEditor()}
       </View>
     );
   }
@@ -14,8 +35,20 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  content: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  inputMethodEditor: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  toolbar: {
+    flex:1,
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(0,0,0,0.04)',
+    backgroundColor: 'white',
   },
 });

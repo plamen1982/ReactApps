@@ -21,6 +21,7 @@ export default class CommentInput extends React.Component {
     }
 
     handleSubmitEditing = () => {
+
         const { onSubmit } = this.props;
         const { text } = this.state;
 
@@ -37,7 +38,7 @@ export default class CommentInput extends React.Component {
         const { text } = this.state;
 
         return (
-            <View>
+            <View style={styles.container}>
                 <TextInput
                     style={styles.input}
                     value={text}

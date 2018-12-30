@@ -25,7 +25,7 @@ NavigationBar.defaultProps = {
     onPressLeftText: () => {},
 };
 
-const styles = StyleSheet({
+const styles = StyleSheet.create({
     container: {
         height: 40,
         borderBottomWidth: StyleSheet.hairlineWidth,

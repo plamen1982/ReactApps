@@ -45,14 +45,13 @@ export default class Feed extends React.Component {
         }
     }
 
-    shouldComponentUpdate(nextProps) {
-        return this.props.linkText !== nextProps.linkText;
-    }
+    // shouldComponentUpdate(nextProps) {
+    //     return this.props.linkText !== nextProps.linkText;
+    // }
 
     render() {
         const { style, commentsForItem, onPressComments } = this.props;
         const { loading, error, items } = this.state;
-
         if(loading) {
             return <ActivityIndicator size='large'/>
         }

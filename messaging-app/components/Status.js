@@ -11,7 +11,25 @@ import {
 
 export default class Status extends React.Component {
   state = {
-    info: 'none'
+    info: null
+  };
+
+  async componentWillMount() {
+    this.subscription = NetInfo.addEventListener('connectionChange', this.handleChange);
+
+    const info = await NetInfo.getConnectionInfo();
+
+    this.setState({ info });
+
+    setTimeout(() => this.handleChange('none'), 3000); 
+  }
+
+  componentWillUnmount() {
+      this.subscription.remove();
+  }
+
+  handleChange = (info) => {
+    this.setState({ info });
   };
 
   render() {

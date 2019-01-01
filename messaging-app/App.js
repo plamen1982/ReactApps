@@ -1,29 +1,32 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
+import Status from './components/Status';
+
 export default class App extends React.Component {
 
   renderMessageList = () => {
     return (
-      <View style={styles.content}><Text>1</Text></View>
+      <View style={styles.content}></View>
     );
   }
 
   renderInputMethodEditor = () => {
     return (
-      <View style={styles.inputMethodEditor}><Text>2</Text></View>
+      <View style={styles.inputMethodEditor}></View>
     );
   }
 
   renderToolbar = () => {
     return (
-        <View style={styles.toolbar}><Text>3</Text></View>
+        <View style={styles.toolbar}></View>
     );
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <Status />
         {this.renderMessageList()}
         {this.renderToolbar()}
         {this.renderInputMethodEditor()}

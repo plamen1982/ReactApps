@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 export const MessageShape = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  type: PropTypes.oneOf(["text", "image", "location"]),
+  type: PropTypes.oneOf(['text', 'image', 'location']),
   text: PropTypes.string,
   coordinate: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
@@ -19,7 +19,7 @@ function getNextId() {
 
 export function createTextMessage(text) {
   return {
-    type: "text",
+    type: 'text',
     id: getNextId(),
     text,
   };
@@ -27,7 +27,7 @@ export function createTextMessage(text) {
 
 export function createImageMessage(uri) {
   return {
-    type: "image",
+    type: 'image',
     id: getNextId(),
     uri,
   };
@@ -35,7 +35,7 @@ export function createImageMessage(uri) {
 
 export function createLocationMessage(coordinate) {
   return {
-    type: "location",
+    type: 'location',
     id: getNextId(),
     coordinate,
   };

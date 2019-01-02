@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   FlatList,
   Image,
@@ -6,11 +6,11 @@ import {
   Text,
   TouchableOpacity,
   View
-} from "react-native";
-import { MapView } from "expo";
-import PropTypes from "prop-types";
+} from 'react-native';
+import { MapView } from 'expo';
+import PropTypes from 'prop-types';
 
-import { MessageShape } from "../utils/MessageUtils";
+import { MessageShape } from '../utils/MessageUtils';
 
 const keyExtractor = item => item.id.toString();
 
@@ -38,15 +38,15 @@ export default class MessageList extends React.Component {
 
   renderMessageBody = ({ type, text, uri, coordinate }) => {
     switch (type) {
-      case "text":
+      case 'text':
         return (
           <View style={styles.messageBubble}>
             <Text style={styles.text}>{text}</Text>
           </View>
         );
-      case "image":
+      case 'image':
         return <Image style={styles.image} source={{ uri }} />;
-      case "location":
+      case 'location':
         return (
           <MapView
             style={styles.map}
@@ -73,7 +73,7 @@ export default class MessageList extends React.Component {
         data={messages}
         renderItem={this.renderMessageItem}
         keyExtractor={keyExtractor}
-        keyboardShouldPersistTaps={"handled"}
+        keyboardShouldPersistTaps={'handled'}
       />
     );
   }
@@ -82,24 +82,24 @@ export default class MessageList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-    // overflow: "visible" // Prevents clipping on resize!
+    // overflow: 'visible' // Prevents clipping on resize!
   },
   messageRow: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     marginBottom: 4,
     marginRight: 10,
     marginLeft: 60
   },
-  messageBuble: {
+  messageBubble: {
     paddingVertical: 5,
     paddingHorizontal: 10,
-    backgroundColor: "rgb(16, 135, 255)",
+    backgroundColor: 'rgb(16, 135, 255)',
     borderRadius: 20
   },
   text: {
     fontSize: 18,
-    color: "white"
+    color: 'white'
   },
   image: {
     width: 150,

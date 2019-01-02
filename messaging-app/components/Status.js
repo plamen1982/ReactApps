@@ -21,7 +21,7 @@ export default class Status extends React.Component {
 
     this.setState({ info });
 
-    setTimeout(() => this.handleChange('none'), 3000); 
+    // setTimeout(() => this.handleChange('none'), 3000); 
   }
 
   componentWillUnmount() {

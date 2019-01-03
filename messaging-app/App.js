@@ -1,12 +1,12 @@
 import React from "react";
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View, Alert, TouchableHighlight, Image } from "react-native";
 
 import Status from "./components/Status";
 import MessageList from "./components/MessageList";
 import {
   createImageMessage,
   createLocationMessage,
-  createTextMessage,
+  createTextMessage
 } from "./utils/MessageUtils";
 
 export default class App extends React.Component {
@@ -19,17 +19,21 @@ export default class App extends React.Component {
         latitude: 42.2645,
         longitude: 23.1164
       })
-    ]
+    ],
+    fullscreenImageId: null
   };
 
   renderMessageList = () => {
     const { messages } = this.state;
 
     return (
-        <View style={styles.content}>
-          <MessageList messages={messages} onPressMessage={this.handlePressMessage}/>
-        </View>
-      );
+      <View style={styles.content}>
+        <MessageList
+          messages={messages}
+          onPressMessage={this.handlePressMessage}
+        />
+      </View>
+    );
   };
 
   renderInputMethodEditor = () => {
@@ -41,29 +45,60 @@ export default class App extends React.Component {
   };
 
   handlePressMessage = ({ id, type }) => {
-
-    switch(type) {
-      case 'text': 
+    switch (type) {
+      case "text":
         Alert.alert(
-          'Delete message?',
-          'Are you sure you want to permanently delete this message?',
+          "Delete message?",
+          "Are you sure you want to permanently delete this message?",
           [
             {
-              text: 'Cancel',
-              style: 'cancel'
+              text: "Cancel",
+              style: "cancel"
             },
             {
-              text: 'Delete',
-              style: 'destructive',
+              text: "Delete",
+              style: "destructive",
               onPress: () => {
                 const { messages } = this.state;
-                this.setState({ messages: messages.filter(message => message.id !== id) });
-              },
-            },
-          ],
-        ); break;
-      default: break;
+                this.setState({
+                  messages: messages.filter(message => message.id !== id)
+                });
+              }
+            }
+          ]
+        );
+        break;
+
+      case "image":
+        this.setState({ fullscreenImageId: id });
+        break;
+
+      default:
+        break;
     }
+  };
+
+  dismissFullscreenImage = () => {
+    this.setState({ fullscreenImageId: null });
+  };
+
+  renderFullscreenImage = () => {
+    const { messages, fullscreenImageId } = this.state;
+
+    if(!fullscreenImageId) return null;
+
+    const image = messages.find(message => message.id === fullscreenImageId);
+
+    if(!image) return null;
+
+    const { uri } = image;
+
+    return (
+      <TouchableHighlight style={styles.fullscreenOverlay} onPress={this.dismissFullscreenImage}>
+        <Image style={styles.fullscreenImage} source={{ uri }} />
+      </TouchableHighlight>
+    );
+
   }
 
   render() {
@@ -73,6 +108,7 @@ export default class App extends React.Component {
         {this.renderMessageList()}
         {this.renderToolbar()}
         {this.renderInputMethodEditor()}
+        {this.renderFullscreenImage()}
       </View>
     );
   }
@@ -93,7 +129,16 @@ const styles = StyleSheet.create({
   },
   toolbar: {
     borderTopWidth: 1,
-    borderTopColor: 'rgba(0,0,0,0.04)',
-    backgroundColor: 'white',
+    borderTopColor: "rgba(0,0,0,0.04)",
+    backgroundColor: "white"
+  },
+  fullscreenOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "black",
+    zIndex: 2
+  },
+  fullscreenImage: {
+    flex: 1,
+    resizeMode: "contain"
   }
 });

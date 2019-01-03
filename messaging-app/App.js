@@ -1,8 +1,17 @@
 import React from "react";
-import { StyleSheet, View, Alert, TouchableHighlight, Image, BackHandler } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Alert,
+  TouchableHighlight,
+  Image,
+  BackHandler
+} from "react-native";
 
 import Status from "./components/Status";
 import MessageList from "./components/MessageList";
+import Toolbar from "./components/Toolbar";
+
 import {
   createImageMessage,
   createLocationMessage,
@@ -20,45 +29,40 @@ export default class App extends React.Component {
         longitude: 23.1164
       })
     ],
-    fullscreenImageId: null
+    fullscreenImageId: null,
+    isInputFocused: false,
   };
 
+  //Hooks------------------------------------------------------------
+
   componentWillMount() {
-    this.subscription = BackHandler.addEventListener('hardwareBackPress', () => {
-      const { fullscreenImageId } = this.state;
+    this.subscription = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        const { fullscreenImageId } = this.state;
 
-      if (fullscreenImageId) {
-        this.dismissFullscreenImage();
-        return true;
+        if (fullscreenImageId) {
+          this.dismissFullscreenImage();
+          return true;
+        }
+
+        return false;
       }
-
-      return false;
-    });
+    );
   }
 
   componentWillUnmount() {
     this.subscription.remove();
   }
 
-  renderMessageList = () => {
-    const { messages } = this.state;
+  //Handlers--------------------------------------------------------
 
-    return (
-      <View style={styles.content}>
-        <MessageList
-          messages={messages}
-          onPressMessage={this.handlePressMessage}
-        />
-      </View>
-    );
+  handlePressToolbarCamera = () => {
+    return null;
   };
 
-  renderInputMethodEditor = () => {
-    return <View style={styles.inputMethodEditor} />;
-  };
-
-  renderToolbar = () => {
-    return <View style={styles.toolbar} />;
+  handlePressToolbarLocation = () => {
+    return null;
   };
 
   handlePressMessage = ({ id, type }) => {
@@ -95,30 +99,82 @@ export default class App extends React.Component {
     }
   };
 
-  dismissFullscreenImage = () => {
-    this.setState({ fullscreenImageId: null });
+  handleChangeFocus = isFocused => {
+    this.setState({ isInputFocused: isFocused });
+  };
+
+  handleSubmit = text => {
+    const { messages } = this.state;
+
+    this.setState({
+      messages: [createTextMessage(text), ...messages]
+    });
+  };
+
+  //HelpingMethods---------------------------------------------------
+
+  renderMessageList = () => {
+    const { messages } = this.state;
+
+    return (
+      <View style={styles.content}>
+        <MessageList
+          messages={messages}
+          onPressMessage={this.handlePressMessage}
+        />
+      </View>
+    );
+  };
+
+  renderInputMethodEditor = () => {
+    return <View style={styles.inputMethodEditor} />;
+  };
+
+  renderToolbar = () => {
+    const { isInputFocused } = this.state;
+
+    return (
+      <View style={styles.toolbar}>
+        <Toolbar
+          isFocused={isInputFocused}
+          onSubmit={this.handleSubmit}
+          onChangeFocus={this.handleChangeFocus}
+          onPressCamera={this.handlePressToolbarCamera}
+          onPressLocation={this.handlePressToolbarLocation}
+        />
+      </View>
+    );
   };
 
   renderFullscreenImage = () => {
     const { messages, fullscreenImageId } = this.state;
 
-    if(!fullscreenImageId) return null;
+    if (!fullscreenImageId) return null;
 
     const image = messages.find(message => message.id === fullscreenImageId);
 
-    if(!image) return null;
+    if (!image) return null;
 
     const { uri } = image;
 
     return (
-      <TouchableHighlight style={styles.fullscreenOverlay} onPress={this.dismissFullscreenImage}>
+      <TouchableHighlight
+        style={styles.fullscreenOverlay}
+        onPress={this.dismissFullscreenImage}
+      >
         <Image style={styles.fullscreenImage} source={{ uri }} />
       </TouchableHighlight>
     );
+  };
 
-  }
+  dismissFullscreenImage = () => {
+    this.setState({ fullscreenImageId: null });
+  };
+
+  //MAIN-----------------------------------------------------------------
 
   render() {
+
     return (
       <View style={styles.container}>
         <Status />

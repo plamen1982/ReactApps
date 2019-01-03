@@ -21,7 +21,7 @@ ToolbarButton.propTypes = {
   onPress: PropTypes.func.isRequired
 };
 
-export default class Toolbar extends React.Component() {
+export default class Toolbar extends React.Component {
   state = {
     text: ""
   };

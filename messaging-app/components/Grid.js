@@ -11,7 +11,7 @@ export default class Grid extends React.Component {
 
   static defaultProps = {
     numColumns: 4,
-    itemMargin: StyleSheet.hairlineWidth
+    itemMargin: StyleSheet.hairlineWidth,
   };
 
   renderGridItem = info => {

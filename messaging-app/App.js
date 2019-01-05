@@ -15,7 +15,7 @@ import Toolbar from "./components/Toolbar";
 import {
   createImageMessage,
   createLocationMessage,
-  createTextMessage,
+  createTextMessage
 } from "./utils/MessageUtils";
 
 export default class App extends React.Component {
@@ -30,7 +30,7 @@ export default class App extends React.Component {
       })
     ],
     fullscreenImageId: null,
-    isInputFocused: false,
+    isInputFocused: false
   };
 
   //Hooks------------------------------------------------------------
@@ -62,7 +62,23 @@ export default class App extends React.Component {
   };
 
   handlePressToolbarLocation = () => {
-    return null;
+    const { messages } = this.state;
+
+    navigator.geolocation.getCurrentPosition(position => {
+      const {
+        coords: { latitude, longitude }
+      } = position;
+
+      this.setState({
+        messages: [
+          createLocationMessage({
+            latitude,
+            longitude
+          }),
+          ...messages
+        ]
+      });
+    });
   };
 
   handlePressMessage = ({ id, type }) => {
@@ -174,7 +190,6 @@ export default class App extends React.Component {
   //MAIN-----------------------------------------------------------------
 
   render() {
-
     return (
       <View style={styles.container}>
         <Status />

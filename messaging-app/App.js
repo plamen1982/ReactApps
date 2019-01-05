@@ -11,6 +11,7 @@ import {
 import Status from "./components/Status";
 import MessageList from "./components/MessageList";
 import Toolbar from "./components/Toolbar";
+import ImageGrid from "./components/ImageGrid";
 
 import {
   createImageMessage,
@@ -127,6 +128,14 @@ export default class App extends React.Component {
     });
   };
 
+  handlePressImage = uri => {
+    const { messages } = this.state;
+
+    this.setState({
+      messages: [createImageMessage(uri), ...messages],
+    });
+  };
+
   //HelpingMethods---------------------------------------------------
 
   renderMessageList = () => {
@@ -143,8 +152,13 @@ export default class App extends React.Component {
   };
 
   renderInputMethodEditor = () => {
-    return <View style={styles.inputMethodEditor} />;
-  };
+
+    return (
+    <View style={styles.inputMethodEditor}>
+      <ImageGrid onPressImage={this.handlePressImage} />
+    </View>
+  )
+};
 
   renderToolbar = () => {
     const { isInputFocused } = this.state;

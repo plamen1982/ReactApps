@@ -53,7 +53,7 @@ export default class MessageList extends React.Component {
             initialRegion={{
               ...coordinate,
               latitudeDelta: 0.08,
-              longitudeDelta: 0.04
+              longitudeDelta: 0.04,
             }}
           >
             <MapView.Marker coordinate={coordinate} />

@@ -1,15 +1,15 @@
-import React from 'react'
-import { Button, Platform } from 'react-native'
-import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation'
-import Icon from 'react-native-vector-icons/Ionicons'
+import React from 'react';
+import { Button, Platform } from 'react-native';
+import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-import Contacts from '../screens/Contacts'
-import Details from '../screens/Details'
-import NewContact from '../screens/NewContact'
-import Me from '../screens/Me'
+import Contacts from '../screens/Contacts';
+import Details from '../screens/Details';
+import NewContact from '../screens/NewContact';
+import Me from '../screens/Me';
 
-import { capitalizeFirstLetter } from '../helpers/strings'
-import { DrawerButton } from '../components/Header'
+import { capitalizeFirstLetter } from '../helpers/strings';
+import { DrawerButton } from '../components/Header';
 
 export const LeftDrawerButton = ({ navigation }) => {
     if (Platform.OS === 'android'){
@@ -39,11 +39,12 @@ export const ContactsStack = StackNavigator({
             }`
         })
     }
-})
+});
+
 export const MeStack = StackNavigator({
     Me: {
         screen: Me,
-        navigationOptions: (props)=> ({
+        navigationOptions: (props) => ({
             title: 'Me',
             headerLeft: <LeftDrawerButton {...props}/>
         }) 

@@ -3,11 +3,9 @@ import { StyleSheet, TextInput, View } from "react-native";
 import PropTypes from 'prop-types';
 
 export default class SearchInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state= {
-      text: '',
-    }
+  
+  state= {
+    text: '',
   }
 
   handleChangeText = text => {
@@ -48,7 +46,7 @@ export default class SearchInput extends React.Component {
   }
 
   static propTypes = {
-    onSumbit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
   }
   

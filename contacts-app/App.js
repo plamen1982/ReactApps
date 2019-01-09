@@ -2,10 +2,11 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 import Contacts from './screens/Contacts';
+import Profile from './screens/Profile';
 
 export default class App extends React.Component {
   render() {
-    return <Contacts />
+    return <Profile />
   }
 }
 

@@ -14,6 +14,14 @@ export default class User extends React.Component {
     headerStyle: {
       backgroundColor: colors.blue
     },
+    headerLeft: (
+      <MaterialIcons
+        name="menu"
+        size={24}
+        style={{ color: "white", marginLeft: 10 }}
+        onPress={() => navigate("DrawerToggle")}
+      />
+    ),
     headerRight: (
       <MaterialIcons
         name="settings"

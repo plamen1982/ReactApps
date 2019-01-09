@@ -1,27 +1,37 @@
-import React from 'react';
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
   FlatList,
-  ActivityIndicator,
-} from 'react-native';
+  ActivityIndicator
+} from "react-native";
+import { MaterialIcons } from '@expo/vector-icons';
+import colors from "../utils/colors";
 
-import { fetchContacts } from '../utils/api';
+import { fetchContacts } from "../utils/api";
 
-import ContactThumbnail from '../components/ContactThumbnail';
+import ContactThumbnail from "../components/ContactThumbnail";
 
 const keyExtractor = ({ phone }) => phone;
 
 export default class Favorites extends React.Component {
-  static navigationOptions = {
-    title: 'Favorites',
-  };
+  static navigationOptions = ({ navigation: { navigate } }) => ({
+    title: "Favorites",
+    headerLeft: (
+      <MaterialIcons
+        name="menu"
+        size={24}
+        style={{ color: colors.black, marginLeft: 10 }}
+        onPress={() => navigate("DrawerToggle")}
+      />
+    )
+  });
 
   state = {
     contacts: [],
     loading: true,
-    error: false,
+    error: false
   };
 
   async componentDidMount() {
@@ -31,24 +41,26 @@ export default class Favorites extends React.Component {
       this.setState({
         contacts,
         loading: false,
-        error: false,
+        error: false
       });
     } catch (e) {
       this.setState({
         loading: false,
-        error: true,
+        error: true
       });
     }
   }
 
   renderFavoriteThumbnail = ({ item }) => {
-    const { navigation: { navigate } } = this.props;
+    const {
+      navigation: { navigate }
+    } = this.props;
     const { avatar } = item;
 
     return (
       <ContactThumbnail
         avatar={avatar}
-        onPress={() => navigate('Profile', { contact: item })}
+        onPress={() => navigate("Profile", { contact: item })}
       />
     );
   };
@@ -62,16 +74,15 @@ export default class Favorites extends React.Component {
         {loading && <ActivityIndicator size="large" />}
         {error && <Text>Error...</Text>}
 
-        {!loading &&
-          !error && (
-            <FlatList
-              data={favorites}
-              keyExtractor={keyExtractor}
-              numColumns={3}
-              contentContainerStyle={styles.list}
-              renderItem={this.renderFavoriteThumbnail}
-            />
-          )}
+        {!loading && !error && (
+          <FlatList
+            data={favorites}
+            keyExtractor={keyExtractor}
+            numColumns={3}
+            contentContainerStyle={styles.list}
+            renderItem={this.renderFavoriteThumbnail}
+          />
+        )}
       </View>
     );
   }
@@ -79,11 +90,11 @@ export default class Favorites extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    flex: 1,
+    backgroundColor: "white",
+    justifyContent: "center",
+    flex: 1
   },
   list: {
-    alignItems: 'center',
-  },
+    alignItems: "center"
+  }
 });

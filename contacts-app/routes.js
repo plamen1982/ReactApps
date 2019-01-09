@@ -1,20 +1,20 @@
 import React from "react";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer, createBottomTabNavigator } from "react-navigation";
 
 import Contacts from "./screens/Contacts";
 import Profile from "./screens/Profile";
 import Favorites from "./screens/Favorites";
 import User from "./screens/User";
 
-const AppNavigator = createStackNavigator(
+const AppNavigator = createBottomTabNavigator(
 {
   Contacts: {
     screen: Contacts,
   },
 
-  Profile: {
-    screen: Profile,
-  },
+//   Profile: {
+//     screen: Profile,
+//   },
   Favorites: {
       screen: Favorites,
   },
@@ -23,7 +23,6 @@ const AppNavigator = createStackNavigator(
   }
 },
 
-{ initialRouteName: 'User' },
 );
 
 export default createAppContainer(AppNavigator);

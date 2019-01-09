@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import Contacts from './screens/Contacts';
-import Profile from './screens/Profile';
+import AppNavigator from './routes';
 
 export default class App extends React.Component {
   render() {
-    return <Profile />
+    return <AppNavigator />
   }
 }
 

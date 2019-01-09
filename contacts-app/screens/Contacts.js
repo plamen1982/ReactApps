@@ -23,13 +23,12 @@ export default class Contacts extends React.Component {
   async componentDidMount() {
     try {
       const contacts = await fetchContacts();
-      
+
       this.setState({
         contacts,
         loading: false,
         error: false
       });
-
     } catch (e) {
       this.setState({
         loading: false,
@@ -39,9 +38,19 @@ export default class Contacts extends React.Component {
   }
 
   renderContact = ({ item }) => {
+    const {
+      navigation: { navigate }
+    } = this.props;
     const { name, avatar, phone } = item;
 
-    return <ContactListItem name={name} avatar={avatar} phone={phone} />;
+    return (
+      <ContactListItem
+        name={name}
+        avatar={avatar}
+        phone={phone}
+        onPress={() => navigate('Profile')}
+      />
+    );
   };
 
   render() {

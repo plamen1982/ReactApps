@@ -7,6 +7,7 @@ import DetailListItem from "../components/DetailListItem";
 import colors from "../utils/colors";
 
 export default class Profile extends React.Component {
+  
   static navigationOptions = ({ navigation: { state: { params } } }) => {
     const { contact: { name } } = params;
     return {

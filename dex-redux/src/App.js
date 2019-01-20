@@ -20,6 +20,7 @@ import './App.css';
  */
 
 function App({char, searchTerm, searchTermChanged}) {
+  
   return (
     <section>
       <div id="header">

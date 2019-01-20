@@ -19,7 +19,7 @@ export default function char(state = initialState, action) {
               )
             : Char,
         };
-  
+   
       default:
         return state;
     }

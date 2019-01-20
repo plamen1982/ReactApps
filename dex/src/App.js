@@ -52,7 +52,7 @@ function App({char, searchTerm, searchTermChanged}) {
               <td>{curChar.name}</td>
               <td>{curChar.alter_ego}</td>
               <td>{curChar.first_appearance}</td>
-              <img src={curChar.view} alt=''/>
+              <img src={curChar.view} alt='' height="100" width="100"/>
             </tr>
           ))}
         </tbody>

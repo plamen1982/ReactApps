@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import actions from './actions';
 import './App.css';
 
+//article: https://blog.bitsrc.io/react-context-api-a-replacement-for-redux-6e20790492b3
+
 /**
  * With this, the connect function will now return a new component that will make the Store and Actions available to App as props.
  * Since I don’t have any need of internal component state or any lifecycle methods, I will write my App component as a stateless 

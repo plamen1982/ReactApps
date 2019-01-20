@@ -5,19 +5,17 @@ const initialState = {
     searchTerm: '',
 }
 
-export default function char(state = initialState, action) {
-    switch (action.type) {
+export default function char(state = initialState, { type, payload }) {
+    switch (type) {
       case 'SEARCH_INPUT_CHANGED':
-        const {searchTerm} = action.payload;
+        const {searchTerm} = payload;
         return {
           ...state,
           searchTerm: searchTerm,
-          char: searchTerm
-            ? Char.filter(
+          char: searchTerm ? Char.filter(
                 char =>
                   char.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
-              )
-            : Char,
+              ) : Char,
         };
    
       default:

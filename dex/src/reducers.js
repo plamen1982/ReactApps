@@ -1,4 +1,9 @@
-import initialState from './store';
+import Char from './hero';
+
+const initialState = {
+    char: Char,
+    searchTerm: '',
+}
 
 export default function char(state = initialState, action) {
     switch (action.type) {
